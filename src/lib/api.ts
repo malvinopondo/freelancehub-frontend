@@ -20,3 +20,20 @@ export const fetchPayments = () => api<Payment[]>("/api/payments");
 export const fetchContacts = () => api<Contact[]>("/api/contacts");
 export const fetchMessages = () => api<Message[]>("/api/messages");
 export const fetchUsers = () => api<User[]>("/api/users");
+
+export const login = async (email: string, password: string) => {
+  const response = await fetch(`${API_BASE_URL}/api/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (!response.ok) {
+    if (response.status === 422) {
+      throw new Error("Incorrect email or password.");
+    }
+    throw new Error("Something went wrong. Please try again.");
+  }
+
+  return response.json() as Promise<{ user: { id: number; name: string; email: string }; token: string }>;
+};
