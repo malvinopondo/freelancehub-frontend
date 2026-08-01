@@ -19,16 +19,20 @@ const ROLES: { value: Role; title: string; desc: string; icon: typeof Code }[] =
 ];
 
 function RegisterPage() {
-  const { login } = useAuth();
+  const { register } = useAuth();
   const navigate = useNavigate();
   const [role, setRole] = useState<Role>("freelancer");
-  const [form, setForm] = useState({ name: "", email: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    login({ name: form.name || "New User", email: form.email, role });
-    toast.success("Welcome to FreelanceHub!");
-    navigate({ to: "/dashboard" });
+    try {
+      await register(form.name, form.email, form.password, role);
+      toast.success("Welcome to FreelanceHub!");
+      navigate({ to: "/dashboard" });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not create account");
+    }
   };
 
   return (
@@ -80,7 +84,14 @@ function RegisterPage() {
             </div>
             <div className="space-y-1.5">
               <Label>Password</Label>
-              <Input type="password" placeholder="At least 8 characters" required />
+              <Input
+                type="password"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                placeholder="At least 8 characters"
+                minLength={8}
+                required
+              />
             </div>
             <Button type="submit" className="w-full h-11 text-primary-foreground" style={{ background: "var(--gradient-primary)" }}>
               Create my account
