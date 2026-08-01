@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { login as apiLogin } from "./api";
 
 export type Role = "freelancer" | "client" | "admin";
 export interface User {
@@ -10,23 +11,17 @@ export interface User {
 
 const AuthCtx = createContext<{
   user: User | null;
-  login: (u: User) => void;
+  login: (email: string, password: string, role: Role) => Promise<void>;
   logout: () => void;
   setRole: (r: Role) => void;
-}>({ user: null, login: () => {}, logout: () => {}, setRole: () => {} });
-
-const DEFAULT_USER: User = {
-  name: "Alex Morgan",
-  email: "alex@freelancehub.app",
-  role: "freelancer",
-};
+}>({ user: null, login: async () => {}, logout: () => {}, setRole: () => {} });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const raw = typeof window !== "undefined" ? localStorage.getItem("fh-user") : null;
-    setUser(raw ? JSON.parse(raw) : DEFAULT_USER);
+    setUser(raw ? JSON.parse(raw) : null);
   }, []);
 
   useEffect(() => {
@@ -37,12 +32,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthCtx.Provider
       value={{
         user,
-        login: (u) => setUser(u),
+        login: async (email, password, role) => {
+          const { user: verifiedUser, token } = await apiLogin(email, password);
+          localStorage.setItem("fh-token", token);
+          setUser({ name: verifiedUser.name, email: verifiedUser.email, role });
+        },
         logout: () => {
           localStorage.removeItem("fh-user");
+          localStorage.removeItem("fh-token");
           setUser(null);
         },
-        setRole: (r) => setUser((u) => (u ? { ...u, role: r } : { ...DEFAULT_USER, role: r })),
+        setRole: (r) => setUser((u) => (u ? { ...u, role: r } : u)),
       }}
     >
       {children}
