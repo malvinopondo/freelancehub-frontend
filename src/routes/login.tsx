@@ -16,13 +16,18 @@ function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [role, setRole] = useState<Role>("freelancer");
-  const [email, setEmail] = useState("alex@freelancehub.app");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    login({ name: email.split("@")[0] || "User", email, role });
-    toast.success("Signed in");
-    navigate({ to: "/dashboard" });
+    try {
+      await login(email, password, role);
+      toast.success("Signed in");
+      navigate({ to: "/dashboard" });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Sign in failed");
+    }
   };
 
   return (
@@ -72,7 +77,7 @@ function LoginPage() {
             </div>
             <div className="space-y-1.5">
               <Label>Password</Label>
-              <Input type="password" defaultValue="demo1234" required />
+              <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
           </div>
 
