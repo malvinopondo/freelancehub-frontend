@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { login as apiLogin } from "./api";
+import { login as apiLogin, register as apiRegister } from "./api";
 
 export type Role = "freelancer" | "client" | "admin";
 export interface User {
@@ -12,9 +12,10 @@ export interface User {
 const AuthCtx = createContext<{
   user: User | null;
   login: (email: string, password: string, role: Role) => Promise<void>;
+  register: (name: string, email: string, password: string, role: Role) => Promise<void>;
   logout: () => void;
   setRole: (r: Role) => void;
-}>({ user: null, login: async () => {}, logout: () => {}, setRole: () => {} });
+}>({ user: null, login: async () => {}, register: async () => {}, logout: () => {}, setRole: () => {} });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -36,6 +37,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           const { user: verifiedUser, token } = await apiLogin(email, password);
           localStorage.setItem("fh-token", token);
           setUser({ name: verifiedUser.name, email: verifiedUser.email, role });
+        },
+        register: async (name, email, password, role) => {
+          const { user: newUser, token } = await apiRegister(name, email, password);
+          localStorage.setItem("fh-token", token);
+          setUser({ name: newUser.name, email: newUser.email, role });
         },
         logout: () => {
           localStorage.removeItem("fh-user");
