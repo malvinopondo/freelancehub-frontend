@@ -83,9 +83,9 @@ function ApplicationsPage() {
                     <TableCell className="font-medium">{a.jobTitle}</TableCell>
                     <TableCell className="text-muted-foreground">{a.company}</TableCell>
                     <TableCell>{a.appliedAt}</TableCell>
-                    <TableCell>${a.rate}/hr</TableCell>
+                    <TableCell>KES {a.rate}/hr</TableCell>
                     <TableCell>{a.hours}h</TableCell>
-                    <TableCell className="font-semibold">${(a.rate * a.hours).toLocaleString()}</TableCell>
+                    <TableCell className="font-semibold">KES {(a.rate * a.hours).toLocaleString()}</TableCell>
                     <TableCell><StatusBadge status={a.status} /></TableCell>
                     <TableCell className="text-right"><Button size="sm" variant="ghost">View details</Button></TableCell>
                   </TableRow>
