@@ -77,7 +77,7 @@ function ProfilePage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-1.5"><Label>Full name</Label><Input defaultValue={user?.name} /></div>
               <div className="space-y-1.5"><Label>Location</Label><Input defaultValue="San Francisco, CA" /></div>
-              <div className="space-y-1.5"><Label>Hourly rate ($)</Label><Input type="number" defaultValue={95} /></div>
+              <div className="space-y-1.5"><Label>Hourly rate (KES)</Label><Input type="number" defaultValue={95} /></div>
               <div className="space-y-1.5"><Label>Portfolio URL</Label><Input defaultValue="https://alex.design" /></div>
             </div>
             <div className="space-y-1.5">
