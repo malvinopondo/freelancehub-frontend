@@ -61,10 +61,10 @@ function PaymentsPage() {
     <DashboardLayout title="Payments">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { i: DollarSign, l: "Total Earned", v: `$${totalEarned.toLocaleString()}`, tone: "bg-success/15 text-success" },
-          { i: Clock, l: "Pending Payout", v: `$${pendingPayout.toLocaleString()}`, tone: "bg-warning/15 text-warning" },
-          { i: TrendingUp, l: "This Month", v: `$${thisMonth.toLocaleString()}`, tone: "bg-primary/10 text-primary" },
-          { i: Wallet, l: "Avg Hourly Rate", v: `$${avgRate}/hr`, tone: "bg-accent/15 text-accent" },
+          { i: DollarSign, l: "Total Earned", v: `KES ${totalEarned.toLocaleString()}`, tone: "bg-success/15 text-success" },
+          { i: Clock, l: "Pending Payout", v: `KES ${pendingPayout.toLocaleString()}`, tone: "bg-warning/15 text-warning" },
+          { i: TrendingUp, l: "This Month", v: `KES ${thisMonth.toLocaleString()}`, tone: "bg-primary/10 text-primary" },
+          { i: Wallet, l: "Avg Hourly Rate", v: `KES ${avgRate}/hr`, tone: "bg-accent/15 text-accent" },
         ].map((s) => (
           <Card key={s.l} className="border-border shadow-[var(--shadow-soft)]">
             <CardContent className="p-5">
@@ -87,7 +87,7 @@ function PaymentsPage() {
               <DialogContent>
                 <DialogHeader><DialogTitle>Request a payout</DialogTitle></DialogHeader>
                 <div className="space-y-3">
-                  <div className="space-y-1.5"><Label>Amount</Label><Input defaultValue={`$${pendingPayout}`} /></div>
+                  <div className="space-y-1.5"><Label>Amount</Label><Input defaultValue={`KES ${pendingPayout}`} /></div>
                   <div className="space-y-1.5"><Label>Destination</Label><Input defaultValue="Bank •••• 4421" /></div>
                 </div>
                 <DialogFooter>
@@ -162,10 +162,10 @@ function PaymentsPage() {
                       <TableCell className="font-medium">{p.jobTitle}</TableCell>
                       <TableCell>{p.client}</TableCell>
                       <TableCell>{p.hours}h</TableCell>
-                      <TableCell>${p.rate}/hr</TableCell>
-                      <TableCell>${sub.toLocaleString()}</TableCell>
-                      <TableCell className="text-muted-foreground">${fee.toLocaleString()}</TableCell>
-                      <TableCell className="font-semibold">${(sub - fee).toLocaleString()}</TableCell>
+                      <TableCell>KES {p.rate}/hr</TableCell>
+                      <TableCell>KES {sub.toLocaleString()}</TableCell>
+                      <TableCell className="text-muted-foreground">KES {fee.toLocaleString()}</TableCell>
+                      <TableCell className="font-semibold">KES {(sub - fee).toLocaleString()}</TableCell>
                       <TableCell><StatusBadge status={p.status} /></TableCell>
                       <TableCell className="text-muted-foreground">{p.date}</TableCell>
                       {isClient && (
@@ -186,5 +186,3 @@ function PaymentsPage() {
     </DashboardLayout>
   );
 }
-
-
