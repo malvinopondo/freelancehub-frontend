@@ -78,7 +78,7 @@ function JobsPage() {
               <div>
                 <div className="mb-2 flex items-center justify-between">
                   <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Max hourly rate</Label>
-                  <span className="text-sm font-semibold">${rateRange[0]}/hr</span>
+                  <span className="text-sm font-semibold">KES {rateRange[0]}/hr</span>
                 </div>
                 <Slider value={rateRange} onValueChange={(v) => setRateRange([v[0]])} min={20} max={200} step={5} />
               </div>
@@ -171,7 +171,7 @@ function JobCard({ job }: { job: Job }) {
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-2">
               <h3 className="font-semibold leading-snug">{job.title}</h3>
-              <span className="shrink-0 rounded-full bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent">${job.rate}/hr</span>
+              <span className="shrink-0 rounded-full bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent">KES {job.rate}/hr</span>
             </div>
             <p className="mt-0.5 text-sm text-muted-foreground">{job.company} · <MapPin className="inline h-3 w-3" /> Remote</p>
           </div>
@@ -193,7 +193,7 @@ function JobCard({ job }: { job: Job }) {
             <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
               <SheetHeader>
                 <SheetTitle>{job.title}</SheetTitle>
-                <SheetDescription>{job.company} · ${job.rate}/hr · {job.hours}h estimated</SheetDescription>
+                <SheetDescription>{job.company} · KES {job.rate}/hr · {job.hours}h estimated</SheetDescription>
               </SheetHeader>
               <div className="mt-6 space-y-6 px-1">
                 <div>
