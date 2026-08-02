@@ -43,7 +43,7 @@ function AdminPage() {
     { i: Users, l: "Total Users", v: users.length.toLocaleString() },
     { i: Briefcase, l: "Total Jobs Posted", v: jobs.length.toLocaleString() },
     { i: FileCheck, l: "Applications this week", v: applications.length.toLocaleString() },
-    { i: DollarSign, l: "Revenue Processed", v: "$184K" },
+    { i: DollarSign, l: "Revenue Processed", v: "KES 184K" },
   ];
 
   if (isLoading) {
@@ -110,9 +110,9 @@ function AdminPage() {
                         <TableCell className="font-medium">{a.applicantName}</TableCell>
                         <TableCell>{a.jobTitle}</TableCell>
                         <TableCell className="text-muted-foreground">{a.appliedAt}</TableCell>
-                        <TableCell>${a.rate}/hr</TableCell>
+                        <TableCell>KES {a.rate}/hr</TableCell>
                         <TableCell>{a.hours}h</TableCell>
-                        <TableCell className="font-semibold">${(a.rate * a.hours).toLocaleString()}</TableCell>
+                        <TableCell className="font-semibold">KES {(a.rate * a.hours).toLocaleString()}</TableCell>
                         <TableCell>
                           <Switch
                             checked={reviewed[a.id] ?? a.status !== "Pending"}
@@ -154,7 +154,7 @@ function AdminPage() {
                     <TableRow key={j.id}>
                       <TableCell className="font-medium">{j.title}</TableCell>
                       <TableCell>{j.company}</TableCell>
-                      <TableCell>${j.rate}/hr</TableCell>
+                      <TableCell>KES {j.rate}/hr</TableCell>
                       <TableCell><StatusBadge status={j.status} /></TableCell>
                       <TableCell className="text-muted-foreground">{j.postedAt}</TableCell>
                       <TableCell><Switch defaultChecked={j.status !== "Completed"} /></TableCell>
