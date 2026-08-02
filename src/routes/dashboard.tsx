@@ -86,7 +86,7 @@ function DashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard icon={FileText} label="Total Applications" value="24" delta="+12%" tone="primary" />
         <StatCard icon={Briefcase} label="Active Jobs" value="6" delta="+3" tone="accent" />
-        <StatCard icon={DollarSign} label="Pending Payments" value="$3,240" tone="warning" />
+        <StatCard icon={DollarSign} label="Pending Payments" value="KES 3,240" tone="warning" />
         <StatCard icon={Clock} label="Hours Logged" value="128h" delta="+8h" tone="info" />
       </div>
 
@@ -117,7 +117,7 @@ function DashboardPage() {
                     <TableRow key={j.id}>
                       <TableCell className="font-medium">{j.title}</TableCell>
                       <TableCell className="text-muted-foreground">{j.company}</TableCell>
-                      <TableCell>${j.rate}/hr</TableCell>
+                      <TableCell>KES {j.rate}/hr</TableCell>
                       <TableCell>{j.hours}h</TableCell>
                       <TableCell><StatusBadge status={j.status} /></TableCell>
                       <TableCell className="text-right">
