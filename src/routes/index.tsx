@@ -80,7 +80,7 @@ function Index() {
             {[
               { v: "24,581", l: "Active jobs" },
               { v: "120K+", l: "Freelancers" },
-              { v: "$48.2M", l: "Paid to talent" },
+              { v: "KES 48.2M", l: "Paid to talent" },
             ].map((s) => (
               <div key={s.l} className="rounded-2xl border border-border bg-card p-6 text-center shadow-[var(--shadow-soft)]">
                 <div className="text-3xl font-bold tracking-tight md:text-4xl" style={{ fontFamily: "Sora, system-ui" }}>{s.v}</div>
