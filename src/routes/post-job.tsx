@@ -70,7 +70,7 @@ function PostJobPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-3">
-              <div className="space-y-1.5"><Label>Hourly rate ($)</Label><Input type="number" value={form.rate} onChange={(e) => setForm({ ...form, rate: Number(e.target.value) })} /></div>
+              <div className="space-y-1.5"><Label>Hourly rate (KES)</Label><Input type="number" value={form.rate} onChange={(e) => setForm({ ...form, rate: Number(e.target.value) })} /></div>
               <div className="space-y-1.5"><Label>Estimated hours</Label><Input type="number" value={form.hours} onChange={(e) => setForm({ ...form, hours: Number(e.target.value) })} /></div>
               <div className="space-y-1.5"><Label>Apply email</Label><Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></div>
             </div>
@@ -91,7 +91,7 @@ function PostJobPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-semibold leading-snug">{form.title || "Job title"}</h3>
-                    <span className="shrink-0 rounded-full bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent">${form.rate}/hr</span>
+                    <span className="shrink-0 rounded-full bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent">KES {form.rate}/hr</span>
                   </div>
                   <p className="mt-0.5 text-sm text-muted-foreground">Your Company · <MapPin className="inline h-3 w-3" /> Remote</p>
                 </div>
